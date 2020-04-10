@@ -1,0 +1,1 @@
+# Information Retrieval project, retrieving events from Meetup API and searching over them using Elasticsearch
