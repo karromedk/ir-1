@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 
 import AppSearchAPIConnector from "@elastic/search-ui-app-search-connector";
-import { SearchProvider, Results, SearchBox } from "@elastic/react-search-ui";
 import { Layout } from "@elastic/react-search-ui-views";
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
 import {
@@ -17,9 +16,9 @@ import {
 } from "@elastic/react-search-ui";
 
 const connector = new AppSearchAPIConnector({
-	searchKey: "search-qfd47bqtyz8qhqprmwzsyjxm",
+	searchKey: "search-pwrgngpcbv78z2c5gcitgdwt",
 	engineName: "events",
-	hostIdentifier: "https://ab9e017c1b1643069867710f4aec5db8.app-search.eu-west-2.aws.cloud.es.io"
+	hostIdentifier: "host-osfgj8"
 });
 
 const configurationOptions = {
