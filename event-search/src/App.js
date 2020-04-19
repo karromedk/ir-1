@@ -5,40 +5,92 @@ import AppSearchAPIConnector from "@elastic/search-ui-app-search-connector";
 import { SearchProvider, Results, SearchBox } from "@elastic/react-search-ui";
 import { Layout } from "@elastic/react-search-ui-views";
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
+import {
+	PagingInfo,
+	ResultsPerPage,
+	Paging,
+	Facet,
+	SearchProvider,
+	Results,
+	SearchBox,
+	Sorting
+} from "@elastic/react-search-ui";
 
 const connector = new AppSearchAPIConnector({
-	searchKey: "[YOUR_SEARCH_KEY]",
-	engineName: "video-games",
-	hostIdentifier: "[YOUR_HOST_IDENTIFIER]"
+	searchKey: "search-qfd47bqtyz8qhqprmwzsyjxm",
+	engineName: "events",
+	hostIdentifier: "https://ab9e017c1b1643069867710f4aec5db8.app-search.eu-west-2.aws.cloud.es.io"
 });
 
 const configurationOptions = {
-	apiConnector: connector
-	// Let's fill this in together.
+	apiConnector: connector,
+	searchQuery: {
+		search_fields: {
+			// 1. Search by name of video game.
+			name: {}
+		},
+		// 2. Results: name of the video game, its genre, publisher, scores, and platform.
+		result_fields: {
+			name: {
+				// A snippet means that matching search terms will be highlighted via <em> tags.
+				snippet: {
+					size: 75, // Limit the snippet to 75 characters.
+					fallback: true // Fallback to a "raw" result.
+				}
+			},
+			description: {
+				snippet: {
+					size: 100,
+					fallback: true
+				}
+			}
+		},
+		// 3. Facet by scores, genre, publisher, and platform, which we'll use to build filters later.
+	}
 };
 
 function App() {
+
 	return (
-		<div className="App">
-			<header className="Event search engine1">
-				<div1 className="Header">
-					<b>Welcome to a event search enginge!</b>
-				</div1>
-
-				<form>
-					<p>Enter your query </p>
-					<label>
-						<input className="inputField" type="text" name="name" />
-					</label>
-
-				</form>
-
-				<div class="buttonHolder">
-					<button type="submit" class="button">Search</button>
-				</div>
-
-			</header>
-		</div>
+		<SearchProvider config={configurationOptions}>
+			<div className="App">
+				<Layout
+					header={<SearchBox />}
+					bodyContent={<Results titleField="name" urlField="link" />}
+					sideContent={
+						<div>
+							<Sorting
+								label={"Sort by"}
+								sortOptions={[
+									{
+										name: "Relevance",
+										value: "",
+										direction: ""
+									},
+									{
+										name: "Name",
+										value: "name",
+										direction: "asc"
+									}
+								]}
+							/>
+							<Facet field="user_score" label="User Score" />
+							<Facet field="critic_score" label="Critic Score" />
+							<Facet field="genre" label="Genre" />
+							<Facet field="publisher" label="Publisher" isFilterable={true} />
+							<Facet field="platform" label="Platform" />
+						</div>
+					}
+					bodyHeader={
+						<>
+							<PagingInfo />
+							<ResultsPerPage />
+						</>
+					}
+					bodyFooter={<Paging />}
+				/>
+			</div>
+		</SearchProvider>
 	);
 }
 
