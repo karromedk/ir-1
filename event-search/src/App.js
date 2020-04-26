@@ -23,10 +23,22 @@ const connector = new AppSearchAPIConnector({
 
 const configurationOptions = {
 	apiConnector: connector,
+	autocompleteQuery: {
+		suggestions: {
+			types: {
+				documents: {
+					// Which fields to search for suggestions.
+					fields: ["name"]
+				}
+			},
+			// How many suggestions appear.
+			size: 5
+		}
+	},
 	searchQuery: {
 		search_fields: {
 			// 1. Search by name of video game.
-			name: {}
+			name:  {}
 		},
 		// 2. Results: name of the video game, its genre, publisher, scores, and platform.
 		result_fields: {
@@ -39,12 +51,14 @@ const configurationOptions = {
 			},
 			description: {
 				snippet: {
-					size: 100,
-					fallback: true
+					fallback: true // Fallback to a "raw" result.
 				}
 			}
 		},
 		// 3. Facet by scores, genre, publisher, and platform, which we'll use to build filters later.
+		facets: {
+
+		}
 	}
 };
 
@@ -54,7 +68,7 @@ function App() {
 		<SearchProvider config={configurationOptions}>
 			<div className="App">
 				<Layout
-					header={<SearchBox />}
+					header={<SearchBox autocompleteSuggestions={true} />}
 					bodyContent={<Results titleField="name" urlField="link" />}
 					sideContent={
 						<div>
@@ -73,11 +87,7 @@ function App() {
 									}
 								]}
 							/>
-							<Facet field="user_score" label="User Score" />
-							<Facet field="critic_score" label="Critic Score" />
-							<Facet field="genre" label="Genre" />
-							<Facet field="publisher" label="Publisher" isFilterable={true} />
-							<Facet field="platform" label="Platform" />
+							<Facet field=" " label=" " />
 						</div>
 					}
 					bodyHeader={
