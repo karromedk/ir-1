@@ -73,25 +73,30 @@ const configurationOptions = {
 };
 
 const handleChange = (event) => {
-	console.log(event.target.id)
-	console.log("CONFIG INITIAL: ", configurationOptions.searchQuery.search_fields.name);
-	// console.log("STATE FIELD: ", state.field);
+	console.log('EVENT TARGET ID: ', event.target.id)
+	console.log("CONFIG INITIAL: ", configurationOptions.searchQuery.search_fields);
+	console.log(typeof configurationOptions.searchQuery.search_fields);
+	console.log("STATE FIELD: ", state.field);
 
 	if(event.target.checked== true){
 		console.log('true')
 		if(state.field.indexOf(event.target.id) === -1) {
 			state.field.push(event.target.id);
+
+			configurationOptions.searchQuery.search_fields[event.target.id] = {};
+
 			console.log("STATE FIELD: ", state.field);
 			// configurationOptions.searchQuery.search_fields.name = state.field;
-			console.log("CONFIG: ", configurationOptions.searchQuery.search_fields.name);
+			console.log("CONFIG: ", configurationOptions.searchQuery.search_fields);
 
 		}
 	} else {
 		console.log('false')
 		if(state.field.indexOf(event.target.id) > -1){
 			state.field.splice(state.field.indexOf(event.target.id), 1);
+			delete configurationOptions.searchQuery.search_fields[event.target.id];
 			// configurationOptions.searchQuery.search_fields.name = state.field;
-			console.log("CONFIG: ", configurationOptions.searchQuery.search_fields.name);
+			console.log("CONFIG: ", configurationOptions.searchQuery.search_fields);
 			console.log("STATE FIELD IN REMOVE: ", state.field)
 		}
 	}
@@ -111,7 +116,7 @@ function App() {
 						<p>Search for: </p>
 						<div class="ui checkbox">
 							<input
-								id="Title"
+								id="name"
 								type="checkbox"
 								checked={state.checked}
 								onChange={handleChange}
@@ -122,7 +127,7 @@ function App() {
 						</div>
 						<div class="ui checkbox">
 							<input
-								id="Description"
+								id="description"
 								type="checkbox"
 								checked={state.checked}
 								onChange={handleChange}
@@ -133,7 +138,7 @@ function App() {
 						</div>
 						<div class="ui checkbox">
 							<input
-								id="Venue"
+								id="venue"
 								type="checkbox"
 								checked={state.checked}
 								onChange={handleChange}
