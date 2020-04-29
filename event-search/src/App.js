@@ -58,7 +58,12 @@ const configurationOptions = {
 				snippet: {
 					fallback: true // Fallback to a "raw" result.
 				}
-			}
+			},
+			local_date: {
+				snippet: {
+					fallback: true // Fallback to a "raw" result.
+				}
+			},
 		},
 		// 3. Facet by scores, genre, publisher, and platform, which we'll use to build filters later.
 		facets: {
@@ -146,6 +151,11 @@ function App() {
 									{
 										name: "Name",
 										value: "name",
+										direction: "asc"
+									},
+									{
+										name: "Date",
+										value: "local_date",
 										direction: "asc"
 									}
 								]}
