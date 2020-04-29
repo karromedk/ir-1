@@ -113,8 +113,8 @@ function App() {
 					header={
 						<div>
 						<SearchBox autocompleteSuggestions={true} />
-						<p>Search for: </p>
-						<div class="ui checkbox">
+						<h4> Search for: </h4>
+						<div class="checkbox">
 							<input
 								id="name"
 								type="checkbox"
@@ -124,8 +124,6 @@ function App() {
 								readonly=""
 								tabindex="0" />
 							<label>Title</label>
-						</div>
-						<div class="ui checkbox">
 							<input
 								id="description"
 								type="checkbox"
@@ -135,8 +133,6 @@ function App() {
 								readonly=""
 								tabindex="0" />
 							<label>Description</label>
-						</div>
-						<div class="ui checkbox">
 							<input
 								id="venue"
 								type="checkbox"
