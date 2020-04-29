@@ -73,18 +73,24 @@ const configurationOptions = {
 };
 
 const handleChange = (event) => {
-	console.log("STATE FIELD: ", state.field);
+	console.log("CONFIG INITIAL: ", configurationOptions.autocompleteQuery.suggestions.types.documents.fields);
+	// console.log("STATE FIELD: ", state.field);
 
 	if(event.target.checked== true){
 		console.log('true')
 		if(state.field.indexOf(event.target.id) === -1) {
 			state.field.push(event.target.id);
 			console.log("STATE FIELD: ", state.field);
+			configurationOptions.autocompleteQuery.suggestions.types.documents.fields = state.field;
+			console.log("CONFIG: ", configurationOptions.autocompleteQuery.suggestions.types.documents.fields);
+
 		}
 	} else {
 		console.log('false')
 		if(state.field.indexOf(event.target.id) > -1){
 			state.field.splice(state.field.indexOf(event.target.id), 1);
+			configurationOptions.autocompleteQuery.suggestions.types.documents.fields = state.field;
+			console.log("CONFIG: ", configurationOptions.autocompleteQuery.suggestions.types.documents.fields);
 			console.log("STATE FIELD IN REMOVE: ", state.field)
 		}
 	}
