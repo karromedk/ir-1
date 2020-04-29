@@ -43,7 +43,7 @@ const configurationOptions = {
 	searchQuery: {
 		search_fields: {
 			// 1. Search by name of video game.
-			name:  {}
+			name: {}
 		},
 		// 2. Results: name of the video game, its genre, publisher, scores, and platform.
 		result_fields: {
@@ -73,7 +73,8 @@ const configurationOptions = {
 };
 
 const handleChange = (event) => {
-	console.log("CONFIG INITIAL: ", configurationOptions.autocompleteQuery.suggestions.types.documents.fields);
+	console.log(event.target.id)
+	console.log("CONFIG INITIAL: ", configurationOptions.searchQuery.search_fields.name);
 	// console.log("STATE FIELD: ", state.field);
 
 	if(event.target.checked== true){
@@ -81,16 +82,16 @@ const handleChange = (event) => {
 		if(state.field.indexOf(event.target.id) === -1) {
 			state.field.push(event.target.id);
 			console.log("STATE FIELD: ", state.field);
-			configurationOptions.autocompleteQuery.suggestions.types.documents.fields = state.field;
-			console.log("CONFIG: ", configurationOptions.autocompleteQuery.suggestions.types.documents.fields);
+			// configurationOptions.searchQuery.search_fields.name = state.field;
+			console.log("CONFIG: ", configurationOptions.searchQuery.search_fields.name);
 
 		}
 	} else {
 		console.log('false')
 		if(state.field.indexOf(event.target.id) > -1){
 			state.field.splice(state.field.indexOf(event.target.id), 1);
-			configurationOptions.autocompleteQuery.suggestions.types.documents.fields = state.field;
-			console.log("CONFIG: ", configurationOptions.autocompleteQuery.suggestions.types.documents.fields);
+			// configurationOptions.searchQuery.search_fields.name = state.field;
+			console.log("CONFIG: ", configurationOptions.searchQuery.search_fields.name);
 			console.log("STATE FIELD IN REMOVE: ", state.field)
 		}
 	}
