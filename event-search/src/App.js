@@ -15,6 +15,10 @@ import {
 	Sorting
 } from "@elastic/react-search-ui";
 
+const state = {
+	field: []
+}
+
 const connector = new AppSearchAPIConnector({
 	searchKey: "search-pwrgngpcbv78z2c5gcitgdwt",
 	engineName: "events",
@@ -28,7 +32,8 @@ const configurationOptions = {
 			types: {
 				documents: {
 					// Which fields to search for suggestions.
-					fields: ["name"]
+					// fields: state.fields
+					fields: ['name']
 				}
 			},
 			// How many suggestions appear.
@@ -62,13 +67,71 @@ const configurationOptions = {
 	}
 };
 
+const handleChange = (event) => {
+	console.log("STATE FIELD: ", state.field);
+
+	if(event.target.checked== true){
+		console.log('true')
+		if(state.field.indexOf(event.target.id) === -1) {
+			state.field.push(event.target.id);
+			console.log("STATE FIELD: ", state.field);
+		}
+	} else {
+		console.log('false')
+		if(state.field.indexOf(event.target.id) > -1){
+			state.field.splice(state.field.indexOf(event.target.id), 1);
+			console.log("STATE FIELD IN REMOVE: ", state.field)
+		}
+	}
+};
+
+
 function App() {
 
 	return (
+		// <React.Fragment>
 		<SearchProvider config={configurationOptions}>
 			<div className="App">
 				<Layout
-					header={<SearchBox autocompleteSuggestions={true} />}
+					header={
+						<div>
+						<SearchBox autocompleteSuggestions={true} />
+						<p>Search for: </p>
+						<div class="ui checkbox">
+							<input
+								id="Title"
+								type="checkbox"
+								checked={state.checked}
+								onChange={handleChange}
+								class="hidden"
+								readonly=""
+								tabindex="0" />
+							<label>Title</label>
+						</div>
+						<div class="ui checkbox">
+							<input
+								id="Description"
+								type="checkbox"
+								checked={state.checked}
+								onChange={handleChange}
+								class="hidden"
+								readonly=""
+								tabindex="0" />
+							<label>Description</label>
+						</div>
+						<div class="ui checkbox">
+							<input
+								id="Venue"
+								type="checkbox"
+								checked={state.checked}
+								onChange={handleChange}
+								class="hidden"
+								readonly=""
+								tabindex="0" />
+							<label>Venue</label>
+						</div>
+						</div>
+					}
 					bodyContent={<Results titleField="name" urlField="link" />}
 					sideContent={
 						<div>
@@ -100,6 +163,7 @@ function App() {
 				/>
 			</div>
 		</SearchProvider>
+		// </React.Fragment>
 	);
 }
 
