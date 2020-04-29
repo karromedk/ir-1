@@ -16,7 +16,7 @@ import {
 } from "@elastic/react-search-ui";
 
 const state = {
-	field: []
+	field: ['name']
 }
 
 const connector = new AppSearchAPIConnector({
@@ -122,7 +122,8 @@ function App() {
 								onChange={handleChange}
 								class="hidden"
 								readonly=""
-								tabindex="0" />
+								tabindex="0"
+								checked />
 							<label>Title</label>
 							<input
 								id="description"
