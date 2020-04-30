@@ -78,7 +78,7 @@ const handleChange = (event) => {
 	console.log(typeof configurationOptions.searchQuery.search_fields);
 	console.log("STATE FIELD: ", state.field);
 
-	if(event.target.checked== true){
+	if(event.target.filled === true){
 		console.log('true')
 		if(state.field.indexOf(event.target.id) === -1) {
 			state.field.push(event.target.id);
@@ -113,12 +113,12 @@ function App() {
 					header={
 						<div>
 						<SearchBox autocompleteSuggestions={true} />
-						<h4> Search for: </h4>
+						<div id="searchtext" class="sui-sorting__label"> Search for: </div>
 						<div class="checkbox">
 							<input
 								id="name"
 								type="checkbox"
-								checked={state.checked}
+								filled={state.checked}
 								onChange={handleChange}
 								class="hidden"
 								readonly=""
@@ -128,7 +128,7 @@ function App() {
 							<input
 								id="description"
 								type="checkbox"
-								checked={state.checked}
+								filled={state.checked}
 								onChange={handleChange}
 								class="hidden"
 								readonly=""
@@ -137,7 +137,7 @@ function App() {
 							<input
 								id="venue"
 								type="checkbox"
-								checked={state.checked}
+								filled={state.checked}
 								onChange={handleChange}
 								class="hidden"
 								readonly=""
