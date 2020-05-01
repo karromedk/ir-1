@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
 import AppSearchAPIConnector from "@elastic/search-ui-app-search-connector";
@@ -43,7 +43,6 @@ const configurationOptions = {
 	searchQuery: {
 		search_fields: {
 			// 1. Search by name of video game.
-			name: {}
 		},
 		// 2. Results: name of the video game, its genre, publisher, scores, and platform.
 		result_fields: {
@@ -72,7 +71,8 @@ const configurationOptions = {
 	}
 };
 
-const handleChange = (event) => {
+/*
+const xhandleChange = (event) => {
 	console.log('EVENT TARGET ID: ', event.target.id)
 	console.log("CONFIG INITIAL: ", configurationOptions.searchQuery.search_fields);
 	console.log(typeof configurationOptions.searchQuery.search_fields);
@@ -101,9 +101,23 @@ const handleChange = (event) => {
 		}
 	}
 };
-
+*/
 
 function App() {
+
+	const [state, setState] = useState({name: false, description: false, venue: false})
+	const handleChange = (checkbox) => {
+		setState({...state, [checkbox]: !state[checkbox]})
+	}
+
+	useEffect(() => {
+		const search_fields = Object.keys(state).reduce((obj, field) => state[field] ? {...obj, [field]: {}} : obj, {})
+		if (Object.keys(search_fields).length) {
+			configurationOptions.searchQuery.search_fields = search_fields
+		} else {
+			configurationOptions.searchQuery.search_fields = Object.keys(state).reduce((obj, field) => ({...obj, [field]: {}}), {})
+		}
+	}, [state])
 
 	return (
 		// <React.Fragment>
@@ -113,36 +127,23 @@ function App() {
 					header={
 						<div>
 						<SearchBox autocompleteSuggestions={true} />
-						<div id="searchtext" class="sui-sorting__label"> Search for: </div>
-						<div class="checkbox">
+						<div id="specifySearch" className="sui-sorting__label"> SPECIFY SEARCH </div>
+						<div className="checkbox">
 							<input
 								id="name"
 								type="checkbox"
-								filled={state.checked}
-								onChange={handleChange}
-								class="hidden"
-								readonly=""
-								tabindex="0"
-								checked />
-							<label>Title</label>
+								onChange={() => handleChange('name')}
+							/><label>Event name</label>
 							<input
 								id="description"
 								type="checkbox"
-								filled={state.checked}
-								onChange={handleChange}
-								class="hidden"
-								readonly=""
-								tabindex="0" />
-							<label>Description</label>
+								onChange={() => handleChange('description')}
+							/><label>Event description</label>
 							<input
 								id="venue"
 								type="checkbox"
-								filled={state.checked}
-								onChange={handleChange}
-								class="hidden"
-								readonly=""
-								tabindex="0" />
-							<label>Venue</label>
+								onChange={() => handleChange('venue')}
+							/><label>Event venue</label>
 						</div>
 						</div>
 					}

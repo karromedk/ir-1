@@ -22,7 +22,11 @@
 
 .checkbox{
 	font-size: 12px;
-	padding-right: 5px;
+	padding-right: 25px;
+}
+
+.checkbox label{
+	margin: 0px 20px 0px 3px;
 }
 
 #searchtext{
