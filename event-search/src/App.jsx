@@ -15,9 +15,11 @@ import {
 	Sorting
 } from "@elastic/react-search-ui";
 
+/*
 const state = {
 	field: ['name']
 }
+*/
 
 const connector = new AppSearchAPIConnector({
 	searchKey: "search-pwrgngpcbv78z2c5gcitgdwt",
@@ -103,7 +105,7 @@ const xhandleChange = (event) => {
 };
 */
 
-function App() {
+const App = () => {
 
 	const [state, setState] = useState({name: false, description: false, venue: false})
 	const handleChange = (checkbox) => {
@@ -127,7 +129,7 @@ function App() {
 					header={
 						<div>
 						<SearchBox autocompleteSuggestions={true} />
-						<div id="specifySearch" className="sui-sorting__label"> SPECIFY SEARCH </div>
+						<div id="specifySearch" className="sui-sorting__label" style={{marginTop: '25px', marginBottom: '10px'}}> SPECIFY SEARCH </div>
 						<div className="checkbox">
 							<input
 								id="name"
