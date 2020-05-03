@@ -16,7 +16,7 @@ import {
 } from "@elastic/react-search-ui";
 
 const connector = new AppSearchAPIConnector({
-	searchKey: "search-yf94n3zjscie3ub883bcr67c",
+	searchKey: "search-1a9wpv91e8bi32sp7r55tysa",
 	engineName: "events",
 	hostIdentifier: "host-6oggxt"
 });
@@ -51,6 +51,7 @@ const configurationOptions = {
 			},
 			description: {
 				snippet: {
+					size: 350,
 					fallback: true // Fallback to a "raw" result.
 				}
 			},
