@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 import AppSearchAPIConnector from "@elastic/search-ui-app-search-connector";
@@ -22,9 +22,9 @@ const state = {
 */
 
 const connector = new AppSearchAPIConnector({
-	searchKey: "search-pwrgngpcbv78z2c5gcitgdwt",
+	searchKey: "search-yf94n3zjscie3ub883bcr67c",
 	engineName: "events",
-	hostIdentifier: "host-osfgj8"
+	hostIdentifier: "host-6oggxt"
 });
 
 const configurationOptions = {
@@ -107,17 +107,17 @@ const xhandleChange = (event) => {
 
 const App = () => {
 
-	const [state, setState] = useState({name: false, description: false, venue: false})
+	const [state, setState] = useState({ name: false, description: false, venue: false })
 	const handleChange = (checkbox) => {
-		setState({...state, [checkbox]: !state[checkbox]})
+		setState({ ...state, [checkbox]: !state[checkbox] })
 	}
 
 	useEffect(() => {
-		const search_fields = Object.keys(state).reduce((obj, field) => state[field] ? {...obj, [field]: {}} : obj, {})
+		const search_fields = Object.keys(state).reduce((obj, field) => state[field] ? { ...obj, [field]: {} } : obj, {})
 		if (Object.keys(search_fields).length) {
 			configurationOptions.searchQuery.search_fields = search_fields
 		} else {
-			configurationOptions.searchQuery.search_fields = Object.keys(state).reduce((obj, field) => ({...obj, [field]: {}}), {})
+			configurationOptions.searchQuery.search_fields = Object.keys(state).reduce((obj, field) => ({ ...obj, [field]: {} }), {})
 		}
 	}, [state])
 
@@ -128,25 +128,25 @@ const App = () => {
 				<Layout
 					header={
 						<div>
-						<SearchBox autocompleteSuggestions={true} />
-						<div id="specifySearch" className="sui-sorting__label" style={{marginTop: '25px', marginBottom: '10px'}}> SPECIFY SEARCH </div>
-						<div className="checkbox">
-							<input
-								id="name"
-								type="checkbox"
-								onChange={() => handleChange('name')}
-							/><label>Event name</label>
-							<input
-								id="description"
-								type="checkbox"
-								onChange={() => handleChange('description')}
-							/><label>Event description</label>
-							<input
-								id="venue"
-								type="checkbox"
-								onChange={() => handleChange('venue')}
-							/><label>Event venue</label>
-						</div>
+							<SearchBox autocompleteSuggestions={true} />
+							<div id="specifySearch" className="sui-sorting__label" style={{ marginTop: '25px', marginBottom: '10px' }}> SPECIFY SEARCH </div>
+							<div className="checkbox">
+								<input
+									id="name"
+									type="checkbox"
+									onChange={() => handleChange('name')}
+								/><label>Event name</label>
+								<input
+									id="description"
+									type="checkbox"
+									onChange={() => handleChange('description')}
+								/><label>Event description</label>
+								<input
+									id="venue"
+									type="checkbox"
+									onChange={() => handleChange('venue')}
+								/><label>Event venue</label>
+							</div>
 						</div>
 					}
 					bodyContent={<Results titleField="name" urlField="link" />}
