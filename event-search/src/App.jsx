@@ -15,12 +15,6 @@ import {
 	Sorting
 } from "@elastic/react-search-ui";
 
-/*
-const state = {
-	field: ['name']
-}
-*/
-
 const connector = new AppSearchAPIConnector({
 	searchKey: "search-yf94n3zjscie3ub883bcr67c",
 	engineName: "events",
@@ -65,6 +59,9 @@ const configurationOptions = {
 					fallback: true // Fallback to a "raw" result.
 				}
 			},
+			link: {
+				raw: {}
+			}
 		},
 		// 3. Facet by scores, genre, publisher, and platform, which we'll use to build filters later.
 		facets: {
@@ -121,8 +118,10 @@ const App = () => {
 		}
 	}, [state])
 
+
+
+
 	return (
-		// <React.Fragment>
 		<SearchProvider config={configurationOptions}>
 			<div className="App">
 				<Layout
@@ -149,7 +148,9 @@ const App = () => {
 							</div>
 						</div>
 					}
-					bodyContent={<Results titleField="name" urlField="link" />}
+					bodyContent={
+						<Results titleField="name" urlField="link" />
+					}
 					sideContent={
 						<div>
 							<Sorting
@@ -185,7 +186,6 @@ const App = () => {
 				/>
 			</div>
 		</SearchProvider>
-		// </React.Fragment>
 	);
 }
 
