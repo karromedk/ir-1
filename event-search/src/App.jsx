@@ -28,7 +28,6 @@ const configurationOptions = {
 			types: {
 				documents: {
 					// Which fields to search for suggestions.
-					// fields: state.fields
 					fields: ['name']
 				}
 			},
@@ -71,37 +70,6 @@ const configurationOptions = {
 	}
 };
 
-/*
-const xhandleChange = (event) => {
-	console.log('EVENT TARGET ID: ', event.target.id)
-	console.log("CONFIG INITIAL: ", configurationOptions.searchQuery.search_fields);
-	console.log(typeof configurationOptions.searchQuery.search_fields);
-	console.log("STATE FIELD: ", state.field);
-
-	if(event.target.filled === true){
-		console.log('true')
-		if(state.field.indexOf(event.target.id) === -1) {
-			state.field.push(event.target.id);
-
-			configurationOptions.searchQuery.search_fields[event.target.id] = {};
-
-			console.log("STATE FIELD: ", state.field);
-			// configurationOptions.searchQuery.search_fields.name = state.field;
-			console.log("CONFIG: ", configurationOptions.searchQuery.search_fields);
-
-		}
-	} else {
-		console.log('false')
-		if(state.field.indexOf(event.target.id) > -1){
-			state.field.splice(state.field.indexOf(event.target.id), 1);
-			delete configurationOptions.searchQuery.search_fields[event.target.id];
-			// configurationOptions.searchQuery.search_fields.name = state.field;
-			console.log("CONFIG: ", configurationOptions.searchQuery.search_fields);
-			console.log("STATE FIELD IN REMOVE: ", state.field)
-		}
-	}
-};
-*/
 
 const App = () => {
 
